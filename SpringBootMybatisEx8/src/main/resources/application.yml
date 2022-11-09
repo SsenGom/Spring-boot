@@ -1,0 +1,23 @@
+server: 
+  port: 9003
+spring:
+  #mvc:
+    #view:
+      #prefix: /WEB-INF/
+      #suffix: .jsp
+  devtools: 
+    livereload:
+      enabled: true
+  #mysql
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sist?serverTimezone=Asia/Seoul
+    username: dragon
+    password: 1234
+  
+#mybatis
+mybatis:
+  type-aliases-package: boot.data.* #mapper와 dto 패키지 둘다 등록하는 곳.
+  mapper-locations:
+  - /mapper/**/*.xml
+  

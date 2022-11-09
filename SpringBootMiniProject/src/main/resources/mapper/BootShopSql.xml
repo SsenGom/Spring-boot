@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="mini.data.mapper.BootShopMapperInter">
+    <select id="getTotalCount" resultType="int">
+    	select count(*) from bootshop
+    </select>
+    <insert id="insertBootShop" parameterType="bsdto">
+       insert into bootshop (sangpum,price,photoname,ipgoday) values (#{sangpum},#{price},#{photoname},now())
+    </insert>
+    <select id="getAllSangpums" resultType="bsdto">
+       select * from bootshop order  by num asc
+    </select>
+    <select id="getData" parameterType="String" resultType="bsdto">
+       select * from bootshop where num=#{num}
+    </select>
+    <update id="updateBootShop" parameterType="bsdto">
+      update bootshop set sangpum=#{sangpum},price=#{price}
+        <if test="photoname!=null">
+        ,photoname=#{photoname}
+        </if>
+         where num=#{num}
+    </update>
+    <delete id="deleteShop" parameterType="String">
+      delete from bootshop where num=#{num}
+    </delete>
+  </mapper>

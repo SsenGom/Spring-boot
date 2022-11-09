@@ -35,7 +35,7 @@ $(function(){
 <body>
 <div style="margin: 50px;">
 	<form action="update" method="post" enctype="multipart/form-data"><!-- 이미지 들어갈 때는 무조건 encdata -->
-			<input type="hidden" value="${dto.num }" name="num">	
+	<input type="hidden" value="${dto.num }" name="num">	
 		<table class="table table-bordered" style="width: 500px;">
 			<tr>
 				<th width="120" bgcolor="pink">작성자</th>

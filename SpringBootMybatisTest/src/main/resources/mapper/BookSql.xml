@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boot.data.mapper.BookMapperInter">
+<select id="CountOfAllBook" resultType="int">
+	select count(*) from bookstore
+</select>
+<select id="ListOfAllBook" resultType="bdto" >
+	select * from bookstore order by num desc
+</select>
+<insert id="insertOfBook" parameterType="bdto">
+	insert into bookstore (bookname,writer,bookprice,bookphoto,bookcompany,ipgoday) values (#{bookname},#{writer},#{bookprice},#{bookphoto},#{bookcompany},now())
+</insert>
+<select id="getDataBook" parameterType="String" resultType="bdto">
+	select *from bookstore where num=#{num}
+</select>
+<update id="updateOfBook" parameterType="bdto">
+	update bookstore set bookname=#{bookname}, writer=#{writer},bookprice=#{bookprice},bookcompany=#{bookcompany} 
+	<if test="bookphoto!=null">
+	,bookphoto=#{bookphoto}
+	</if>
+	where num=#{num}
+</update>
+<delete id="deleteOfBook" parameterType="String">
+	delete from bookstore where num=#{num}
+</delete>
+
+</mapper>
