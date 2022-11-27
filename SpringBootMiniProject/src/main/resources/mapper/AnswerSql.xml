@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="mini.data.mapper.AnswerMapperInter">
+   
+    	<select id="getTotalCount" resultType="int">
+   		select count(*) from springanswer
+   	</select>
+   	<insert id="insertOfAnswer" parameterType="adto">
+   		insert into springanswer (num, name, myid, content, writeday) values(#{num},#{name},#{myid},#{content},now())
+   	</insert>
+   	<select id="getData" parameterType="String" resultType="adto">
+   		select * from springanswer where idx=#{idx}
+   	</select>
+   	<select id="AllList" parameterType="String" resultType="adto">
+       select * from springanswer where num=#{num} order by idx asc
+   	</select>
+   	<update id="updateOfAnswer" parameterType="adto">
+   		update springanswer set content=#{content} where idx=#{idx}
+   	</update>
+   	<delete id="deleteOfAnswer" parameterType="String">
+   		delete from springanswer where idx=#{idx}
+   	</delete>
+   
+  </mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="mini.data.mapper.ReBoardMapperInter">
+	   
+	   <select id="getReTotalCount" parameterType="HashMap" resultType="int">
+	   	select count(*) from reboard2
+	   	<if test="searchcolumn !=null and searchword != null"> <!-- 컬럼이 있을 때는 $, 찾을게 있을 때는 # -->
+	   		where ${searchcolumn} like concat('%',#{searchword},'%')
+	   	</if>
+	   </select>
+	  
+	   <select id="getReMaxNum" resultType="int">
+	   	select ifnull(max(num),0) from reboard2
+	   </select>
+	  
+	   <update id="updateRestep" parameterType="HashMap">
+	   	update reboard2 set restep=restep+1 where regroup=#{regroup} and restep>#{restep}
+	   </update>
+	  
+	   <insert id="insertReBoard" parameterType="reboard">
+	   	insert into reboard2 values(null,#{id},#{name},#{subject},#{photo},#{content},0,0,#{regroup},#{restep},#{relevel},now()) 
+	   </insert>
+	  
+	   <select id="getReList" parameterType="HashMap" resultType="reboard">
+	   	select * from reboard2 
+	   	<if test="searchcolumn !=null and searchword != null"> <!-- 컬럼이 있을 때는 $, 찾을게 있을 때는 # -->
+	   		where ${searchcolumn} like concat('%',#{searchword},'%')
+	   	</if>
+	   	order by regroup desc, restep asc limit #{start},#{perpage}
+	   </select> 
+	   
+	   <update id="updateReadcount" parameterType="int">
+	   	update reboard2 set readcount= readcount+1 where num=#{num}
+	   </update>
+	   
+	   <select id="getData" parameterType="int" resultType="reboard">
+	   	select * from reboard2 where num=#{num}
+	   </select>
+	   
+	   <update id="likesUpdate" parameterType="int">
+	   	update reboard2 set likes=likes+1 where num=#{num}
+	   </update>
+
+  </mapper>

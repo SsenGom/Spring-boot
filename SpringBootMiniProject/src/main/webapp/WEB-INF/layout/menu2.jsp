@@ -42,7 +42,10 @@ ul.menu li a{
      <a href="/">Home</a>
   </li>
   <li>
-     <a href="${root}/bootshop/shopform">상품등록</a>
+     <a href="${root}/smart/list">스마트상점</a>
+  </li>
+    <li>
+     <a href="${root}/reboard/list">답변형게시판</a>
   </li>
   <li>
      <a href="${root}/bootshop/list">상품목록</a>

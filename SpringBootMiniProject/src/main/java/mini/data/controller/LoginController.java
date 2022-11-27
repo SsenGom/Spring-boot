@@ -69,7 +69,8 @@ public class LoginController {
 			session.setAttribute("myid", id); //세션에저장
 			session.setAttribute("loginok", "yes"); //세션에저장
 			session.setAttribute("saveok", cbsave); //세션에저장
-		
+			session.setAttribute("loginname", mdto.getName());
+			
 			return "redirect:main";
 		}else {
 			return "/member/passfail";

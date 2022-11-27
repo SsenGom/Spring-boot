@@ -38,7 +38,7 @@ public class MemberController {
 	@GetMapping("/member/list")
 	public String memberlist(Model model)
 	{
-		List<MemberDto> list=service.getAllMembers();
+		List<MemberDto> list=service.getAllMembers();		
 		
 		model.addAttribute("list", list);
 		model.addAttribute("count", list.size());

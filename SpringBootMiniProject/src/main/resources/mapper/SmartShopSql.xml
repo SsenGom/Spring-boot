@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="mini.data.mapper.SmartShopMapperInter">
+    <select id="getTotalCount" resultType="int">
+    	select count(*) from smartshop
+    </select>
+    <insert id="insertShop" parameterType="smart">
+       insert into smartshop (goods,price,color,content,ipgoday,writeday) values (#{goods},#{price},#{color},#{content},#{ipgoday},now())
+    </insert>
+    <select id="getShopList" resultType="smart" parameterType="HashMap">
+       select * from smartshop order  by num desc limit #{start},#{perpage}
+    </select>
+    <select id="getGoods" parameterType="String" resultType="smart">
+       select * from smartshop where num=#{num}
+    </select>
+    <delete id="deleteShop" parameterType="String">
+      delete from smartshop where num=#{num}
+    </delete>
+  </mapper>

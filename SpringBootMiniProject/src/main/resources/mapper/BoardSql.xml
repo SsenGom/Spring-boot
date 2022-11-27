@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="mini.data.mapper.BoardMapperInter">
+   	<select id="getTotalCount" resultType="int">
+   		select count(*) from springboard
+   	</select>
+   	<insert id="insertOfBaoard" parameterType="bdto">
+   		insert into springboard (name,myid,subject,content,uploadfile,readcount,wirteday) values(#{name},#{myid},#{subject},#{content},#{uploadfile},#{readcount},now())
+   	</insert>
+   	<select id="getData" parameterType="String" resultType="bdto">
+   		select * from springboard where num=#{num}
+   	</select>
+   	<select id="getMaxNum" resultType="int">
+   		select ifnull(max(num),0) from springboard
+   	</select>
+   	<update id="updateReadCount" parameterType="String">
+   		update springboard set readcount =readcount+1 where num=#{num}
+   	</update>
+   	<select id="getList" parameterType="HashMap" resultType="bdto">
+   		select * from springboard order by num desc limit #{start},#{perpage}
+   	</select>
+   	<update id="updateOfBoard" parameterType="bdto">
+   		update springboard set subject=#{subject}, content=#{content}
+   		<if test="uploadfile != null">
+		, uploadfile=#{uploadfile} <!-- 사진을 선택하지 않을 경우 사진 출력 x -->
+		</if>
+		where num=#{num}
+   	</update>
+   	<delete id="deleteOfBoard" parameterType="String">
+   		delete from springboard where num=#{num}
+   	</delete>
+  </mapper>
